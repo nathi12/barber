@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
 
 const queueSchema = new mongoose.Schema({
-    name: {
-        type: String,
+    Day: {
+        type: Date,
         required: true
     },
-    Surname: {
-        type: String,
+    BookingId: {
+        type: ObjectId,
         required: true
-    },
-    Time: {
-        type: String,
-        required: true
-    },
-    Date: {
-        type: Date
     }
 });
 const queue = mongoose.model('queue', queueSchema);
