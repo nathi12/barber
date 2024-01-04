@@ -19,6 +19,37 @@ mongoose.connect(process.env.local_DB)
     })
 
 
+/**
+ * login
+ *  */
+app.get('/login', (req, res) => {
+
+})
+
+
+/**
+ * register
+ */
+app.get('/register', (req, res) => {
+
+})
+
+/**
+ * Landing page
+ */
+
+app.get('/welcom', (req, res) => {
+
+})
+
+
+/**
+ * Home page
+ */
+app.get('/home', (req, res) => {
+
+})
+
 
 
 
