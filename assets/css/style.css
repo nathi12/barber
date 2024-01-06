@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #f6f9ff;
   color: #444444;
 }
@@ -56,6 +56,11 @@ h6 {
 /*--------------------------------------------------------------
 # Page Title
 --------------------------------------------------------------*/
+
+.bs {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .pagetitle {
   margin-bottom: 10px;
 }
@@ -236,7 +241,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: black;
   font-family: "Poppins", sans-serif;
 }
 
