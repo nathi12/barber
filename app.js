@@ -55,7 +55,15 @@ app.get('/welcom', (req, res) => {
  * Home page
  */
 app.get('/home', (req, res) => {
+    res.render('user/home');
+})
 
+/**
+ * Queue
+ */
+
+app.get('/queue', (req, res) => {
+    res.render('admin/queue');
 })
 
 
