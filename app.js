@@ -66,8 +66,12 @@ app.get('/queue', (req, res) => {
     res.render('admin/queue');
 })
 
-
-
+/**
+ * Booking
+ */
+app.get('/booking', (req, res) => {
+    res.render('user/booking');
+})
 
 
 app.listen(PORT, () => {
