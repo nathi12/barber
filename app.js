@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
+const morgan = require('morgan')
+
 const PORT = 3000;
 
 
@@ -13,6 +15,16 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'assets')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+/**
+ * middleware
+ */
+// app.use(morgan('tiny'));
+app.use('/', (req, res, next) => {
+    console.log('my first middleware');
+    next();
+})
+
 
 /**
  * connecting to the database
@@ -67,11 +79,38 @@ app.get('/queue', (req, res) => {
 })
 
 /**
- * Booking
+ * Booking {time slot}
  */
 app.get('/booking', (req, res) => {
     res.render('user/booking');
 })
+
+
+app.get('/booking-1', (req, res) => {
+    res.render('user/booking-1');
+})
+
+/**
+ * users
+ */
+app.get('/users', (req, res) => {
+    res.render('admin/users');
+})
+
+/**
+ * haircuts
+ */
+
+app.get('/haircuts', (req, res) => {
+    res.render('user/haircuts');
+})
+
+
+
+
+app.use((req, res) => {
+    res.status(404).render('error404');
+});
 
 
 app.listen(PORT, () => {
