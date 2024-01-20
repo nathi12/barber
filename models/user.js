@@ -16,7 +16,7 @@ const userschema = new mongoose.Schema({
     email: {
         type: String
     },
-    Contact: {
+    contact: {
         type: String
     },
     password: {

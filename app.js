@@ -3,7 +3,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
-const morgan = require('morgan')
+const methodOverride = require('method-override');
+//const morgan = require('morgan')
+const User = require('./models/user')
+
 
 const PORT = 3000;
 
@@ -13,17 +16,19 @@ const PORT = 3000;
  * setting up views
  *  */
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 /**
  * middleware
  */
 // app.use(morgan('tiny'));
-app.use('/', (req, res, next) => {
-    console.log('my first middleware');
-    next();
-})
+// app.use('/', (req, res, next) => {
+//     console.log('my first middleware');
+//     next();
+// })
 
 
 /**
@@ -46,6 +51,14 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
+app.get('/temp', (req, res) => {
+    res.render('temp');
+})
+
+app.post('/login/new', async (req, res) => {
+    console.log(req.body);
+})
+
 
 /**
  * register
@@ -53,6 +66,16 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register');
 })
+
+app.post('/user/register', async (req, res) => {
+    const newUser = new User(req.body);
+    console.log('new user');
+    console.log(req.body);
+    //await newUser.save();
+    //res.redirect('login');
+})
+
+
 
 /**
  * Landing page
@@ -108,9 +131,9 @@ app.get('/haircuts', (req, res) => {
 
 
 
-app.use((req, res) => {
-    res.status(404).render('error404');
-});
+// app.use((req, res) => {
+//     res.status(404).render('error404');
+// });
 
 
 app.listen(PORT, () => {
