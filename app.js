@@ -15,10 +15,14 @@ const PORT = 3000;
  * /**
  * setting up views
  *  */
-app.use(express.static(path.join(__dirname, 'assets')));
-app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(methodOverride('_method'));
+
 
 
 /**
@@ -51,13 +55,10 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 
-app.get('/temp', (req, res) => {
-    res.render('temp');
-})
-
 app.post('/login/new', async (req, res) => {
     console.log(req.body);
 })
+
 
 
 /**
@@ -69,7 +70,6 @@ app.get('/register', (req, res) => {
 
 app.post('/user/register', async (req, res) => {
     const newUser = new User(req.body);
-    console.log('new user');
     console.log(req.body);
     //await newUser.save();
     //res.redirect('login');
