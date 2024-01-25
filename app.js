@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const app = express();
 const methodOverride = require('method-override');
 //const morgan = require('morgan')
-const User = require('./models/user')
+const User = require('./models/user');
+const { URLSearchParams } = require('url');
 
 
 const PORT = 3000;
@@ -56,6 +57,15 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login/new', async (req, res) => {
+    const { username, password } = req.body;
+    const u = User.find({ username: username });
+    const p = User.find({ password: password });
+
+    if (u !== null & p !== null) {
+        res.redirect('/home');
+    } else {
+        alert('incorrect credentials')
+    }
     console.log(req.body);
 })
 
@@ -68,21 +78,15 @@ app.get('/register', (req, res) => {
     res.render('register');
 })
 
-app.post('/user/register', async (req, res) => {
-    const newUser = new User(req.body);
-    console.log(req.body);
-    //await newUser.save();
-    //res.redirect('login');
-})
-
-
-
-/**
- * Landing page
- */
-
-app.get('/welcom', (req, res) => {
-
+app.post('/register', async (req, res) => {
+    const { password, confirmpassword } = req.body;
+    if (password === confirmpassword) {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.redirect('login');
+    } else {
+        alert('wrong passwords');
+    }
 })
 
 
@@ -117,7 +121,13 @@ app.get('/booking-1', (req, res) => {
  * users
  */
 app.get('/users', (req, res) => {
-    res.render('admin/users');
+
+    User.find({}).then((users) => {
+        console.log(users);
+        res.render('admin/users', { users });
+    }).catch((error) => {
+        console.log('error');
+    })
 })
 
 /**

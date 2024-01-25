@@ -19,6 +19,10 @@ const userschema = new mongoose.Schema({
     contact: {
         type: String
     },
+    dateregistered: {
+        type: Date,
+        default: Date.now
+    },
     password: {
         type: String,
         required: true
