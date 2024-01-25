@@ -11,6 +11,10 @@ const haircutSchema = new mongoose.Schema({
     },
     picture: {
         type: String
+    },
+    active: {
+        type: Number,
+        default: 1
     }
 
 });

@@ -26,6 +26,10 @@ const userschema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    active: {
+        type: Number,
+        default: 1
     }
 });
 

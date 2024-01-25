@@ -17,8 +17,31 @@
             <!-- Main content-->
             <main id="main" class="main">
 
+                <a class="btn btn-outline-dark m-2" href="add-haircut">
+                    <i class="bi bi-plus-circle text-dark me-2"></i>
+                    <span class="text-dark">Add Haircut</span>
+                </a>
 
+                <div class="container">
+                    <div class="row">
 
+                        <% for(let haircut of haircuts){ %>
+                            <div class="col">
+                                <div class="card" style="width: 18rem;">
+                                    <img src=<%=haircut.picture %> class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text fs-3">
+                                            <%= haircut.name %>
+                                        </p>
+                                        <p class="card-text">
+                                            R<%=haircut.price%>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
             </main><!-- End #main -->
 
             <!-- ======= Footer ======= -->

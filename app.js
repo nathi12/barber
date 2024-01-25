@@ -6,6 +6,7 @@ const app = express();
 const methodOverride = require('method-override');
 //const morgan = require('morgan')
 const User = require('./models/user');
+const Haircut = require('./models/haircut');
 const { URLSearchParams } = require('url');
 
 
@@ -134,10 +135,18 @@ app.get('/users', (req, res) => {
  * haircuts
  */
 
-app.get('/haircuts', (req, res) => {
-    res.render('user/haircuts');
+app.get('/haircut', (req, res) => {
+    Haircut.find({}).then(haircuts => {
+        res.render('user/haircuts', { haircuts });
+    }).catch(error => {
+        console.log(error);
+    })
 })
 
+
+app.get('/add-haircut', (req, res) => {
+    res.render('user/add-haircut');
+})
 
 
 
