@@ -3,7 +3,11 @@
 
 <head>
     <title>hair style</title>
+
+
     <%- include('../partials/metadata') %>
+        <script src='/calender/dist/index.global.js'></script>
+
 </head>
 
 <body>
@@ -16,72 +20,98 @@
 
             <!-- Main content-->
             <main id="main" class="main">
-
-                <!--hair cut-->
-                <section class="section">
-                    <div class="row align-items-top">
-                        <!-- <div lass="col-lg-3">
-                                            <div class="card">
-                                                <img src="/img/card.jpg" class="card-img-top" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card with an image on top</h5>
-                                                    <p class="card-text">Some quick example text to build on the card title and make
-                                                        up the bulk of the card's content.</p>
-                                                </div>
-                                            </div>
-                                        </div> -->
-
-                        <div class="col-lg-3">
-                            <!-- Card with an image on bottom -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card with an image on bottom</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
-                                </div>
-                                <img src="/img/card.jpg" class="card-img-bottom" alt="...">
-                            </div><!-- End Card with an image on bottom -->
-                        </div>
-                    </div>
-                </section>
-
-                <!--extra thing to pick-->
-                <div class="card">
+                <!--Selecting the Schedule {Time}-->
+                <div class="card p-3 mt-0">
                     <div class="card-body">
-                        <h5 class="card-title">With Checkboxes and radios</h5>
-
-                        <!-- List group With Checkboxes and radios -->
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                                First checkbox
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                                Second checkbox
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                                Third checkbox
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                                Fourth checkbox
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                                Fifth checkbox
-                            </li>
-                        </ul><!-- End List Checkboxes and radios -->
-
+                        <div id='calendar'></div>
                     </div>
                 </div>
-
 
             </main><!-- End #main -->
 
             <!-- ======= Footer ======= -->
             <%- include('../partials/footer') %>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var calendarEl = document.getElementById('calendar');
+
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            initialDate: '2023-01-12',
+                            initialView: 'timeGridWeek',
+                            headerToolbar: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            },
+                            height: 'auto',
+                            navLinks: true, // can click day/week names to navigate views
+                            editable: true,
+                            selectable: true,
+                            selectMirror: true,
+                            nowIndicator: true,
+                            events: [
+                                {
+                                    title: 'All Day Event',
+                                    start: '2023-01-01',
+                                },
+                                {
+                                    title: 'Long Event',
+                                    start: '2023-01-07',
+                                    end: '2023-01-10'
+                                },
+                                {
+                                    groupId: 999,
+                                    title: 'Repeating Event',
+                                    start: '2023-01-09T16:00:00'
+                                },
+                                {
+                                    groupId: 999,
+                                    title: 'Repeating Event',
+                                    start: '2023-01-16T16:00:00'
+                                },
+                                {
+                                    title: 'Conference',
+                                    start: '2023-01-11',
+                                    end: '2023-01-13'
+                                },
+                                {
+                                    title: 'Meeting',
+                                    start: '2023-01-12T10:30:00',
+                                    end: '2023-01-12T12:30:00'
+                                },
+                                {
+                                    title: 'Lunch',
+                                    start: '2023-01-12T12:00:00'
+                                },
+                                {
+                                    title: 'Meeting',
+                                    start: '2023-01-12T14:30:00'
+                                },
+                                {
+                                    title: 'Happy Hour',
+                                    start: '2023-01-12T17:30:00'
+                                },
+                                {
+                                    title: 'Dinner',
+                                    start: '2023-01-12T20:00:00'
+                                },
+                                {
+                                    title: 'Birthday Party',
+                                    start: '2023-01-13T07:00:00'
+                                },
+                                {
+                                    title: 'Click for Google',
+                                    url: 'http://google.com/',
+                                    start: '2023-01-28'
+                                }
+                            ]
+                        });
+
+                        calendar.render();
+                    });
+
+                </script>
 </body>
 
 </html>

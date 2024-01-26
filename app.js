@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const User = require('./models/user');
 const Haircut = require('./models/haircut');
 const { URLSearchParams } = require('url');
+const haircut = require('./models/haircut');
 
 
 const PORT = 3000;
@@ -21,6 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'seeds')));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(methodOverride('_method'));
@@ -107,13 +109,20 @@ app.get('/queue', (req, res) => {
 })
 
 /**
- * Booking {time slot}
+ * Booking {Selecting the hair cut}
  */
 app.get('/booking', (req, res) => {
-    res.render('user/booking');
+
+    Haircut.find({}).then(haircuts => {
+        res.render('user/booking', { haircuts });
+    }).catch(err => {
+        console.log(err);
+    })
 })
 
-
+/**
+ * Booking {Selecting the time slot}
+ */
 app.get('/booking-1', (req, res) => {
     res.render('user/booking-1');
 })
@@ -124,7 +133,6 @@ app.get('/booking-1', (req, res) => {
 app.get('/users', (req, res) => {
 
     User.find({}).then((users) => {
-        console.log(users);
         res.render('admin/users', { users });
     }).catch((error) => {
         console.log('error');

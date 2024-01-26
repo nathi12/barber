@@ -24,6 +24,8 @@
                 box-shadow: 0 0 0 0.25rem lightgray;
             }
         </style>
+
+        <!-- <link href="/progress-bar/style.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -36,29 +38,76 @@
 
             <!-- Main content-->
             <main id="main" class="main">
+                <!--Progress Bar-->
+                <!-- <div class="container">
+                    <div class="row">
+                        <div id="container">
+                            <div class="line-1"></div>
+                            <div class="circle-1">
+                                <div class="inner-circle-1">
+                                    <span class="text-1">1</span>
+                                </div>
+                            </div>
+
+                            <div class="line-2"></div>
+
+                            <div class="circle-2">
+                                <div class="inner-circle-2">
+                                    <span class="text-2">2</span>
+                                </div>
+                            </div>
+
+                            <div class="line-3"></div>
+                            <button id="left">
+                                < </button>
+                                    <button id="right"> > </button>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!--Haircut style-->
+                <div class="container">
+                    <div class="row">
+                        <% for(let haircut of haircuts){ %>
+                            <div class="col">
+                                <div class="card" style="width: 18rem;">
+                                    <img src=<%=haircut.picture %> class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text fs-3">
+                                            <%= haircut.name %>
+                                        </p>
+                                        <p class="card-text">
+                                            R<%=haircut.price%>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+
 
                 <!--Time-->
                 <ul class="list-group bs">
                     <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                        <label class="form-check-label" for="firstCheckbox">First checkbox</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                        <label class="form-check-label" for="secondCheckbox">Second checkbox</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                        <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
+                        <input class="form-check-input me-1" type="checkbox" value="" id="HairDye">
+                        <label class="form-check-label" for="firstCheckbox">With Hair Dye : R20</label>
                     </li>
                 </ul>
 
                 <!--Total Price-->
 
+
+                <!--Next Button-->
+
             </main><!-- End #main -->
 
             <!-- ======= Footer ======= -->
             <%- include('../partials/footer') %>
+
+
+                <script src="/progress-bar/main.js"></script>
 </body>
 
 </html>
