@@ -8,6 +8,141 @@
     <%- include('../partials/metadata') %>
         <script src='/calender/dist/index.global.js'></script>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialDate: '2024-01-27',
+                    initialView: 'timeGridDay',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: ''
+                    },
+                    themeSystem: 'bootstrap', // Use Bootstrap styling
+                    height: 'auto',
+                    navLinks: true, // can click day/week names to navigate views
+                    editable: true,
+                    selectable: true,
+                    selectMirror: true,
+                    nowIndicator: true,
+                    select: function (arg) {
+                        var title = prompt('Event Title:');
+                        if (title) {
+                            calendar.addEvent({
+                                title: title,
+                                start: arg.start,
+                                end: arg.end,
+                                allDay: arg.allDay
+                            })
+                        }
+                        calendar.unselect()
+                    },
+                    eventClick: function (arg) {
+                        var selectedColor = 'black';
+                        var unselectedColor = 'lightgrey';
+
+                        calendar.getEvents().forEach(function (event) {
+                            if (event !== arg.event) { // Exclude the clicked event
+                                event.setProp('backgroundColor', unselectedColor);
+                                event.setProp('borderColor', unselectedColor);
+                            }
+                        });
+
+                        //clicked event
+                        arg.event.setProp('backgroundColor', selectedColor);
+                        arg.event.setProp('borderColor', selectedColor);
+
+                        var title = arg.event.title;
+                        var start = arg.event.start;
+                        var end = arg.event.end;
+
+                        // Log the information (you can use it as needed)
+                        console.log('Title:', title);
+                        console.log('Start:', start);
+                        console.log('End:', end);
+
+
+
+                    },
+                    events: [
+                        {
+                            title: 'All Day Event',
+                            start: '2024-01-27',
+                        },
+                        {
+                            title: 'Long Event',
+                            start: '2024-01-27',
+                            end: '2024-01-28'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2024-01-27T16:00:00'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2024-01-28T16:00:00'
+                        },
+                        {
+                            title: 'Conference',
+                            start: '2024-01-28T16:00:00',
+                            end: '2024-01-28T18:00:00'
+                        },
+                        {
+                            title: 'Meeting',
+                            start: '2024-01-27T10:30:00',
+                            end: '2024-01-27T12:30:00'
+                        },
+                        {
+                            title: 'Lunch',
+                            start: '2024-01-27T12:00:00'
+                        },
+                        {
+                            title: 'Meeting',
+                            start: '2024-01-27T14:30:00'
+                        },
+                        {
+                            title: 'Happy Hour',
+                            start: '2023-01-12T17:30:00'
+                        },
+                        {
+                            title: 'Dinner',
+                            start: '2023-01-12T20:00:00'
+                        },
+                        {
+                            title: 'Birthday Party',
+                            start: '2023-01-13T07:00:00'
+                        },
+                        {
+                            title: 'Click for Google',
+                            url: 'http://google.com/',
+                            start: '2023-01-28'
+                        }
+                    ]
+                });
+
+                calendar.render();
+            });
+
+        </script>
+
+        <style>
+            .fc-prev-button,
+            .fc-next-button,
+            .fc-today-button,
+            .fc-dayGridMonth-button,
+            .fc-timeGridWeek-button,
+            .fc-timeGridDay-button,
+            .fc-listWeek-button {
+                background: black !important;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+            }
+        </style>
+
+
 </head>
 
 <body>
@@ -32,86 +167,6 @@
             <!-- ======= Footer ======= -->
             <%- include('../partials/footer') %>
 
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var calendarEl = document.getElementById('calendar');
-
-                        var calendar = new FullCalendar.Calendar(calendarEl, {
-                            initialDate: '2023-01-12',
-                            initialView: 'timeGridWeek',
-                            headerToolbar: {
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                            },
-                            height: 'auto',
-                            navLinks: true, // can click day/week names to navigate views
-                            editable: true,
-                            selectable: true,
-                            selectMirror: true,
-                            nowIndicator: true,
-                            events: [
-                                {
-                                    title: 'All Day Event',
-                                    start: '2023-01-01',
-                                },
-                                {
-                                    title: 'Long Event',
-                                    start: '2023-01-07',
-                                    end: '2023-01-10'
-                                },
-                                {
-                                    groupId: 999,
-                                    title: 'Repeating Event',
-                                    start: '2023-01-09T16:00:00'
-                                },
-                                {
-                                    groupId: 999,
-                                    title: 'Repeating Event',
-                                    start: '2023-01-16T16:00:00'
-                                },
-                                {
-                                    title: 'Conference',
-                                    start: '2023-01-11',
-                                    end: '2023-01-13'
-                                },
-                                {
-                                    title: 'Meeting',
-                                    start: '2023-01-12T10:30:00',
-                                    end: '2023-01-12T12:30:00'
-                                },
-                                {
-                                    title: 'Lunch',
-                                    start: '2023-01-12T12:00:00'
-                                },
-                                {
-                                    title: 'Meeting',
-                                    start: '2023-01-12T14:30:00'
-                                },
-                                {
-                                    title: 'Happy Hour',
-                                    start: '2023-01-12T17:30:00'
-                                },
-                                {
-                                    title: 'Dinner',
-                                    start: '2023-01-12T20:00:00'
-                                },
-                                {
-                                    title: 'Birthday Party',
-                                    start: '2023-01-13T07:00:00'
-                                },
-                                {
-                                    title: 'Click for Google',
-                                    url: 'http://google.com/',
-                                    start: '2023-01-28'
-                                }
-                            ]
-                        });
-
-                        calendar.render();
-                    });
-
-                </script>
 </body>
 
 </html>
