@@ -18,7 +18,7 @@ It is an application for booking a place in a queue in a barber shop
 * username: nathi
 * password: nathi
 
-CLICK <a href=""  target="_blank">HERE</a> TO VIEW IT
+CLICK <a href="https://barber-lb2p.onrender.com/login"  target="_blank">HERE</a> TO VIEW IT
 
 ### Progress
 * refactoring into ReactJs
