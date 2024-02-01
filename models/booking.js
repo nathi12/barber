@@ -9,8 +9,12 @@ const bookingSchema = new mongoose.Schema({
         type: ObjectId,
         requied: true
     },
-    Time: {
+    Slot: {
         type: Date
+    },
+    DateBook: {
+        type: Date,
+        default: Date.now
     }
 });
 

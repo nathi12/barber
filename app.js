@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const methodOverride = require('method-override');
-//const morgan = require('morgan')
+const morgan = require('morgan')
 const User = require('./models/user');
 const Haircut = require('./models/haircut');
 const { URLSearchParams } = require('url');
@@ -32,18 +32,16 @@ app.use(methodOverride('_method'));
 /**
  * middleware
  */
-// app.use(morgan('tiny'));
-// app.use('/', (req, res, next) => {
-//     console.log('my first middleware');
-//     next();
-// })
+app.use(morgan('tiny'));
+app.use('/', (req, res, next) => {
+    next();
+})
 
 
 /**
  * connecting to the database
  */
-
-mongoose.connect(process.env.local_DB)
+mongoose.connect(process.env.PROD_DB)
     .then(() => {
         console.log('database connected');
     }).catch((err) => {
@@ -80,7 +78,6 @@ app.post('/login/new', async (req, res) => {
 app.get('/register', (req, res) => {
     res.render('register');
 })
-
 app.post('/register', async (req, res) => {
     const { password, confirmpassword } = req.body;
     if (password === confirmpassword) {
@@ -108,13 +105,13 @@ app.get('/queue', (req, res) => {
     res.render('admin/queue');
 })
 
+
 /**
  * Booking {Selecting the hair cut}
  */
-app.get('/booking', (req, res) => {
-
+app.get('/book/haircut', (req, res) => {
     Haircut.find({}).then(haircuts => {
-        res.render('user/booking', { haircuts });
+        res.render('user/bookhaircut', { haircuts });
     }).catch(err => {
         console.log(err);
     })
@@ -123,8 +120,8 @@ app.get('/booking', (req, res) => {
 /**
  * Booking {Selecting the time slot}
  */
-app.get('/booking-1', (req, res) => {
-    res.render('user/booking-1');
+app.get('/book/slot', (req, res) => {
+    res.render('user/bookslot');
 })
 
 /**
@@ -142,7 +139,6 @@ app.get('/users', (req, res) => {
 /**
  * haircuts
  */
-
 app.get('/haircut', (req, res) => {
     Haircut.find({}).then(haircuts => {
         res.render('user/haircuts', { haircuts });
@@ -151,17 +147,13 @@ app.get('/haircut', (req, res) => {
     })
 })
 
-
 app.get('/add-haircut', (req, res) => {
     res.render('user/add-haircut');
 })
 
-
-
-// app.use((req, res) => {
-//     res.status(404).render('error404');
-// });
-
+app.use((req, res) => {
+    res.status(404).render('error404');
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port :${PORT}`);

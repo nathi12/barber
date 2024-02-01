@@ -4,7 +4,6 @@
 <head>
     <title>Booking</title>
 
-
     <%- include('../partials/metadata') %>
 
         <style>
@@ -33,7 +32,6 @@
                 border: 4px solid green;
             }
         </style>
-
         <!-- <link href="/progress-bar/style.css" rel="stylesheet"> -->
 </head>
 
@@ -109,6 +107,10 @@
 
 
                 <!--Next Button-->
+                <a class="btn btn-outline-dark mt-4" href="/book/slot">
+                    <span class="text-dark">Pick The Slot</span>
+                    <i class="bi bi-arrow-bar-right text-dark ms-2"></i>
+                </a>
 
             </main><!-- End #main -->
 
@@ -119,7 +121,12 @@
                 <script src="/progress-bar/main.js"></script>
 
                 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
                 <script>
+                    /**
+                     * Selecting the haircut
+                     * 
+                    */
                     $(document).ready(function () {
                         $(".haircut-col").on("click", function () {
                             //create a new booking document with the infomation 
